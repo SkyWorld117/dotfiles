@@ -45,12 +45,12 @@ tar -xzf ripgrep-${rg_name}-*.tar.gz
 cp ripgrep-${rg_name}-*/rg $HOME/.local/bin
 
 # Install LuaRocks
-luarocks_version="$( curl -s https://luarocks.github.io/luarocks/releases/ | grep -oP "luarocks-\K.*?(?=.tar.gz)" | head -n 1 )"
-wget "https://luarocks.github.io/luarocks/releases/luarocks-${luarocks_version}.tar.gz"
-tar -xzf luarocks-${luarocks_version}.tar.gz
-cd luarocks-${luarocks_version}
-./configure --prefix=$HOME/.local
-make install
+# luarocks_version="$( curl -s https://luarocks.github.io/luarocks/releases/ | grep -oP "luarocks-\K.*?(?=.tar.gz)" | head -n 1 )"
+# wget "https://luarocks.github.io/luarocks/releases/luarocks-${luarocks_version}.tar.gz"
+# tar -xzf luarocks-${luarocks_version}.tar.gz
+# cd luarocks-${luarocks_version}
+# ./configure --prefix=$HOME/.local
+# make install
 
 # Install tree-sitter
 if [ $(uname -m) = "x86_64" ]; then
