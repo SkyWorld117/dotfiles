@@ -6,40 +6,42 @@ Host jumphost
 Host racklette
     HostName racklette1.cscs.ch
     User zyi
-    ProxyJump jumphost
     IdentityFile ~/.ssh/racklette
+    ProxyJump jumphost
 
 Host piora
     HostName piora.cscs.ch
     User zyi
-    ProxyJump jumphost
     IdentityFile ~/.ssh/racklette
+    ProxyJump jumphost
 
 Host sbrinz
     HostName sbrinz.cscs.ch
     User zyi
-    ProxyJump jumphost
     IdentityFile ~/.ssh/racklette
+    ProxyJump jumphost
 
 Host nuc
     HostName 192.168.3.225
     User zyi
-    ProxyJump sbrinz
     IdentityFile ~/.ssh/racklette
+    ProxyJump sbrinz
 
 Host euler
     HostName euler.ethz.ch
     User yizhuy
     IdentityFile ~/.ssh/ethz
+    ProxyJump jumphost
 
 Host maximus
     HostName maximus.inf.ethz.ch
     User yizhuy
     IdentityFile ~/.ssh/ethz
+    ProxyJump jumphost
 
 Host gitlab.ethz.ch
     PreferredAuthentications publickey
-    IdentityFile ~/.ssh/ethz
+    IdentityFile ~/.ssh/ethz    
 
 Host github.com
     PreferredAuthentications publickey
