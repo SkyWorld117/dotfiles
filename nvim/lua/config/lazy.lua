@@ -32,7 +32,7 @@ require("lazy").setup({
         border = "rounded"
     },
     rocks = { 
-        enabled = false
+        enabled = true
     },
     -- colorscheme that will be used when installing plugins.
     install = { colorscheme = { "habamax" } },

@@ -1,12 +1,14 @@
 #!/bin/bash
 
-SCRIPT_DIR=$(cd $(dirname $0); pwd)
+SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 CLUSTER=${HOSTNAME%?}
+ON_CLUSTER=false
 
 if [ $CLUSTER = "sbrinz" ] || [ $CLUSTER = "piora" ]; then
     echo "Assuming all dependencies are installed"
+    ON_CLUSTER=true
 else
-    sudo dnf -y install ninja-build cmake gcc make unzip gettext curl glibc-gconv-extra lua lua-devel ncurses-devel libevent-devel readline-devel
+    sudo dnf -y install ninja-build cmake gcc make unzip gettext curl glibc-gconv-extra lua lua-devel ncurses-devel libevent-devel readline-devel nodejs
 fi
 
 mkdir -p ${SCRIPT_DIR}/tmp
@@ -44,13 +46,18 @@ fi
 tar -xzf ripgrep-${rg_name}-*.tar.gz
 cp ripgrep-${rg_name}-*/rg $HOME/.local/bin
 
-# Install LuaRocks
-# luarocks_version="$( curl -s https://luarocks.github.io/luarocks/releases/ | grep -oP "luarocks-\K.*?(?=.tar.gz)" | head -n 1 )"
-# wget "https://luarocks.github.io/luarocks/releases/luarocks-${luarocks_version}.tar.gz"
-# tar -xzf luarocks-${luarocks_version}.tar.gz
-# cd luarocks-${luarocks_version}
-# ./configure --prefix=$HOME/.local
-# make install
+# Install LuaRocks if not on a cluster
+if ! ${ON_CLUSTER}; then
+    luarocks_version="$( curl -s https://luarocks.github.io/luarocks/releases/ | grep -oP "luarocks-\K.*?(?=.tar.gz)" | head -n 1 )"
+    wget "https://luarocks.github.io/luarocks/releases/luarocks-${luarocks_version}.tar.gz"
+    tar -xzf luarocks-${luarocks_version}.tar.gz
+    cd luarocks-${luarocks_version}
+    ./configure --prefix=$HOME/.local
+    make install
+    sed -i "s|ROCKS_SUPPORT|true|g" ${SCRIPT_DIR}/lua/config/lazy.lua
+else
+    sed -i "s|ROCKS_SUPPORT|false|g" ${SCRIPT_DIR}/lua/config/lazy.lua
+fi
 
 # Install tree-sitter
 if [ $(uname -m) = "x86_64" ]; then
@@ -63,3 +70,6 @@ cp tree-sitter-linux-* $HOME/.local/bin/tree-sitter
 chmod +x $HOME/.local/bin/tree-sitter
 
 rm -rf ${SCRIPT_DIR}/tmp
+mkdir -p ${HOME}/.config/nvim
+rm -rf ${HOME}/.config/nvim/*
+cp -r ${SCRIPT_DIR}/* ${HOME}/.config/nvim/
