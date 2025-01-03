@@ -32,3 +32,8 @@ vim.keymap.set('i', '<C-l>', SuggestOneCharacter, {expr = true, remap = false})
 vim.keymap.set('i', '<C-right>', SuggestOneWord, {expr = true, remap = false})
 
 vim.keymap.set('n', '<leader>e', ':Neotree<CR>')
+
+vim.keymap.set('n', '<leader>fn', ':Telescope notify<CR>')
+
+vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
+vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action, {})

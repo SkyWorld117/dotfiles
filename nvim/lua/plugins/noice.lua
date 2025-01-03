@@ -2,7 +2,7 @@ return {
     {
         "rcarriga/nvim-notify",
         opts = {
-            background_colour = "#1E222A",
+            background_colour = "#FFFFFF",
         },
     },
     {
