@@ -8,7 +8,7 @@ if [ $CLUSTER = "sbrinz" ] || [ $CLUSTER = "piora" ]; then
     echo "Assuming all dependencies are installed"
     ON_CLUSTER=true
 else
-    sudo dnf -y install ninja-build cmake gcc make unzip gettext curl glibc-gconv-extra lua lua-devel ncurses-devel libevent-devel readline-devel nodejs
+    sudo dnf -y install ninja-build cmake gcc make unzip gettext curl glibc-gconv-extra lua lua-devel ncurses-devel libevent-devel readline-devel nodejs npm
 fi
 
 mkdir -p ${SCRIPT_DIR}/tmp
