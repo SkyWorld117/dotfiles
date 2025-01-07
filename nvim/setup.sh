@@ -69,6 +69,13 @@ gunzip tree-sitter-linux-*.gz
 cp tree-sitter-linux-* $HOME/.local/bin/tree-sitter
 chmod +x $HOME/.local/bin/tree-sitter
 
+# Install nvm npm nodejs
+if ${ON_CLUSTER}; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+    source ${HOME}/.bashrc
+    nvm install 22
+fi
+
 rm -rf ${SCRIPT_DIR}/tmp
 mkdir -p ${HOME}/.config/nvim
 rm -rf ${HOME}/.config/nvim/*
