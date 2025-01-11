@@ -36,3 +36,7 @@ cp ~/.local/share/icons/Bibata-Modern-Classic/* ~/.icons/default/
 # Install Oh My Posh
 curl -s https://ohmyposh.dev/install.sh | bash -s
 
+# Configure gdm monitor
+sudo cp ~/.config/monitors.xml ~gdm/.config
+sudo chown gdm: ~gdm/.config/monitors.xml
+
