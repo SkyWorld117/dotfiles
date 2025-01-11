@@ -1,0 +1,10 @@
+background = #000000
+background-opacity = 0.5
+
+window-vsync = true
+window-decoration = false
+window-padding-x = 10
+window-padding-y = 10
+
+font-family = "CaskaydiaMono Nerd Font"
+adjust-cell-width = 15%
