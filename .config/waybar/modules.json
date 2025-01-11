@@ -61,7 +61,8 @@
     },
     "hyprland/language": {
        "format": "  {}",
-       "format-en": "EN"
+       "format-en": "US",
+       "format-": "US INTL"
     },
     "battery": {
         "states": {
