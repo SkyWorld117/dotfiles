@@ -13,18 +13,3 @@ window-padding-y = 10
 
 font-family = "CaskaydiaMono Nerd Font"
 adjust-cell-width = 15%
-
-keybind = super+h=goto_split:left
-keybind = super+j=goto_split:down
-keybind = super+k=goto_split:up
-keybind = super+l=goto_split:right
-
-keybind = super+shift+h=new_split:left
-keybind = super+shift+j=new_split:down
-keybind = super+shift+k=new_split:up
-keybind = super+shift+l=new_split:right
-
-keybind = super+u=resize_split:left,20
-keybind = super+i=resize_split:down,20
-keybind = super+o=resize_split:up,20
-keybind = super+p=resize_split:right,20
