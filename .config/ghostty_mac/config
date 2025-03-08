@@ -1,0 +1,33 @@
+shell-integration-features = sudo
+
+background = #000000
+background-opacity = 0.3
+background-blur = 20
+
+theme = "GitHub-Dark-Default"
+cursor-style = bar
+adjust-cursor-thickness = 2
+cursor-text = #FFFFFF
+
+window-vsync = true
+macos-titlebar-style = hidden
+window-padding-x = 10
+window-padding-y = 10
+
+font-family = "CaskaydiaMono Nerd Font"
+adjust-cell-width = 15%
+
+keybind = alt+h=goto_split:left
+keybind = alt+j=goto_split:down
+keybind = alt+k=goto_split:up
+keybind = alt+l=goto_split:right
+
+keybind = alt+shift+h=new_split:left
+keybind = alt+shift+j=new_split:down
+keybind = alt+shift+k=new_split:up
+keybind = alt+shift+l=new_split:right
+
+keybind = alt+u=resize_split:left,20
+keybind = alt+i=resize_split:down,20
+keybind = alt+o=resize_split:up,20
+keybind = alt+p=resize_split:right,20
