@@ -34,13 +34,14 @@ local cal = sbar.add("item", {
 })
 
 -- Double border for calendar using a single item bracket
---sbar.add("bracket", { cal.name }, {
+-- sbar.add("bracket", { cal.name }, {
 --  background = {
 --    color = colors.transparent,
 --    height = 30,
---    border_color = colors.grey,
+--    border_color = colors.bg2,
+--    border_width = 2
 --  }
---})
+-- })
 
 -- Padding item required because of bracket
 sbar.add("item", { position = "right", width = settings.group_paddings })
