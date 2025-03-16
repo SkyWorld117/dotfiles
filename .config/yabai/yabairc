@@ -37,3 +37,5 @@ yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Selec
 yabai -m config layout bsp
 
 yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+
+yabai -m signal --add event=window_destroyed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
