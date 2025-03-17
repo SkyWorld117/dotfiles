@@ -1,8 +1,9 @@
+shell-integration = bash
 shell-integration-features = sudo
 
 background = #000000
-background-opacity = 0.3
-background-blur = 20
+background-opacity = 0.6
+background-blur = 40
 
 theme = "GitHub-Dark-Default"
 cursor-style = bar
