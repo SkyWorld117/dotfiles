@@ -103,24 +103,67 @@ local space_window_observer = sbar.add("item", {
   updates = true,
 })
 
+function dump(o)
+   if type(o) == 'table' then
+      local s = '{ '
+      for k,v in pairs(o) do
+         if type(k) ~= 'number' then k = '"'..k..'"' end
+         s = s .. '['..k..'] = ' .. dump(v) .. ','
+      end
+      return s .. '} '
+   else
+      return tostring(o)
+   end
+end
+
 space_window_observer:subscribe("space_windows_change", function(env)
-  local icon_line = ""
-  local no_app = true
-  for app, count in pairs(env.INFO.apps) do
-    no_app = false
-    local lookup = app_icons[app]
-    local icon = ((lookup == nil) and app_icons["Default"] or lookup)
-    icon_line = icon_line .. icon
-  end
+    -- Orion needs to be handled separately
+    -- It creates Orion Preview windows on every space change
 
-  if (no_app) then
-    icon_line = " —"
-  end
-  spaces[env.INFO.space]:set( { drawing = not no_app or selects[env.INFO.space] } )
-  paddings[env.INFO.space]:set( { drawing = not no_app or selects[env.INFO.space] } )
-  no_apps[env.INFO.space] = no_app
+    local json = io.popen("yabai -m query --windows --space " .. env.INFO.space .. " | jq -c '.[]'"):read("*a")
 
-  sbar.animate("tanh", 10, function()
-    spaces[env.INFO.space]:set({ label = icon_line })
-  end)
+    local icon_line = ""
+    local no_app = true
+    local window_table = {}
+
+    for entry in json:gmatch("{.-}") do
+        local app = entry:match('"app"%s*:%s*"([^"]+)"')
+        local title = entry:match('"title"%s*:%s*"([^"]+)"')
+        if app and title then
+            table.insert(window_table, { app = app, title = title })
+        end
+    end
+
+    for _, entry in ipairs(window_table) do
+        if (entry.app == "Orion" and entry.title ~= "Orion Preview") then
+            local icon = app_icons["Orion"]
+            icon_line = icon_line .. icon
+            no_app = false
+        end
+    end
+
+    -- local orion_preview = 0
+    -- for entry in json:gmatch('"title"%s*:%s*"Orion Preview"') do
+    --     orion_preview = orion_preview + 1
+    -- end
+
+    for app, count in pairs(env.INFO.apps) do
+        if (app ~= "Orion") then
+            local lookup = app_icons[app]
+            local icon = ((lookup == nil) and app_icons["Default"] or lookup)
+            no_app = false
+            icon_line = icon_line .. icon
+        end
+    end
+
+    if (no_app) then
+        icon_line = " —"
+    end
+    spaces[env.INFO.space]:set( { drawing = not no_app or selects[env.INFO.space] } )
+    paddings[env.INFO.space]:set( { drawing = not no_app or selects[env.INFO.space] } )
+    no_apps[env.INFO.space] = no_app
+
+    sbar.animate("tanh", 10, function()
+        spaces[env.INFO.space]:set({ label = icon_line })
+    end)
 end)

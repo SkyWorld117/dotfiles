@@ -33,9 +33,11 @@ yabai -m rule --add label="Finder" app="^Finder$" title="(Co(py|nnect)|Move|Info
 yabai -m rule --add label="Safari" app="^Safari$" title="^(General|(Tab|Password|Website|Extension)s|AutoFill|Se(arch|curity)|Privacy|Advance)$" manage=off
 yabai -m rule --add label="About This Mac" app="System Information" title="About This Mac" manage=off
 yabai -m rule --add label="Select file to save to" app="^Inkscape$" title="Select file to save to" manage=off
+yabai -m rule --add app="Orion" title="Orion Preview" manage=off
 
 yabai -m config layout bsp
 
-yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+# yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq 'map(select(.title != \"Orion Preview\")) | .[0].id') && sleep 0.05 && yabai -m window --focus \$(yabai -m query --windows --space | jq 'map(select(.title != \"Orion Preview\")) | .[0].id')"
 
-yabai -m signal --add event=window_destroyed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
+yabai -m signal --add event=window_destroyed action="yabai -m window --focus \$(yabai -m query --windows --space | jq 'map(select(.title != \"Orion Preview\")) | .[0].id') && sleep 0.05 && yabai -m window --focus \$(yabai -m query --windows --space | jq 'map(select(.title != \"Orion Preview\")) | .[0].id')"
