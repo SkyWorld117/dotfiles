@@ -66,7 +66,7 @@ local wifi_bracket = sbar.add("bracket", "widgets.wifi.bracket", {
   wifi_up.name,
   wifi_down.name
 }, {
-  background = { color = colors.bg2 , border_color = colors.bg1, border_width = 1 },
+  background = { color = colors.bg2 , border_color = colors.bg1, border_width = 2 },
   blur_radius = 20,
   popup = { align = "center", height = 30 }
 })
