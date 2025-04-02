@@ -106,27 +106,27 @@ space_window_observer:subscribe("space_windows_change", function(env)
     -- Orion needs to be handled separately
     -- It creates Orion Preview windows on every space change
 
-    local json = io.popen("yabai -m query --windows --space " .. env.INFO.space .. " | jq -c '.[]'"):read("*a")
+    -- local json = io.popen("yabai -m query --windows --space " .. env.INFO.space .. " | jq -c '.[]'"):read("*a")
 
     local icon_line = ""
     local no_app = true
-    local window_table = {}
+    -- local window_table = {}
 
-    for entry in json:gmatch("{.-}") do
-        local app = entry:match('"app"%s*:%s*"([^"]+)"')
-        local title = entry:match('"title"%s*:%s*"([^"]+)"')
-        if app and title then
-            table.insert(window_table, { app = app, title = title })
-        end
-    end
+    -- for entry in json:gmatch("{.-}") do
+    --     local app = entry:match('"app"%s*:%s*"([^"]+)"')
+    --     local title = entry:match('"title"%s*:%s*"([^"]+)"')
+    --     if app and title then
+    --         table.insert(window_table, { app = app, title = title })
+    --     end
+    -- end
 
-    for _, entry in ipairs(window_table) do
-        if (entry.app == "Orion" and entry.title ~= "Orion Preview") then
-            local icon = app_icons["Orion"]
-            icon_line = icon_line .. icon
-            no_app = false
-        end
-    end
+    -- for _, entry in ipairs(window_table) do
+    --     if (entry.app == "Orion" and entry.title ~= "Orion Preview") then
+    --         local icon = app_icons["Orion"]
+    --         icon_line = icon_line .. icon
+    --         no_app = false
+    --     end
+    -- end
 
     -- local orion_preview = 0
     -- for entry in json:gmatch('"title"%s*:%s*"Orion Preview"') do
@@ -134,12 +134,16 @@ space_window_observer:subscribe("space_windows_change", function(env)
     -- end
 
     for app, count in pairs(env.INFO.apps) do
-        if (app ~= "Orion") then
-            local lookup = app_icons[app]
-            local icon = ((lookup == nil) and app_icons["Default"] or lookup)
-            no_app = false
-            icon_line = icon_line .. icon
-        end
+        -- if (app ~= "Orion") then
+        --     local lookup = app_icons[app]
+        --     local icon = ((lookup == nil) and app_icons["Default"] or lookup)
+        --     no_app = false
+        --     icon_line = icon_line .. icon
+        -- end
+        local lookup = app_icons[app]
+        local icon = ((lookup == nil) and app_icons["Default"] or lookup)
+        no_app = false
+        icon_line = icon_line .. icon
     end
 
     if (no_app) then
