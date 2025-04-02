@@ -19,4 +19,17 @@ return {
   --     ["Black"] = "ExtraBold",
   --   },
   -- },
+  font = {
+    text = "CaskaydiaMono Nerd Font Mono", -- Used for text
+    numbers = "CaskaydiaMono Nerd Font Mono", -- Used for numbers
+    style_map = {
+      ["Regular"] = "Regular",
+      ["Semibold"] = "Medium",
+      ["Bold"] = "SemiBold",
+      ["Heavy"] = "Bold",
+      ["Light"] = "SemiLight"
+    },
+  },
+
+  blur_radius = 60
 }

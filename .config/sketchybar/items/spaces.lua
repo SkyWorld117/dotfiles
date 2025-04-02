@@ -34,7 +34,7 @@ for i = 1, 10, 1 do
       height = 26,
       border_color = colors.bg1,
     },
-    blur_radius = 20,
+    blur_radius = settings.blur_radius,
     popup = { background = { border_width = 5, border_color = colors.black } }
   })
 
@@ -51,19 +51,6 @@ for i = 1, 10, 1 do
 
   no_apps[i] = true
   selects[i] = false
-
-  local space_popup = sbar.add("item", {
-    position = "popup." .. space.name,
-    padding_left= 5,
-    padding_right= 0,
-    background = {
-      drawing = true,
-      image = {
-        corner_radius = 9,
-        scale = 0.2
-      }
-    }
-  })
 
   space:subscribe("space_change", function(env)
     local selected = env.SELECTED == "true"
@@ -85,7 +72,6 @@ for i = 1, 10, 1 do
 
   space:subscribe("mouse.clicked", function(env)
     if env.BUTTON == "other" then
-      space_popup:set({ background = { image = "space." .. env.SID } })
       space:set({ popup = { drawing = "toggle" } })
     else
       local op = (env.BUTTON == "right") and "--destroy" or "--focus"

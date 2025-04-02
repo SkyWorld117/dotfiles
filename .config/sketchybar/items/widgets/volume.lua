@@ -10,7 +10,10 @@ local volume_percent = sbar.add("item", "widgets.volume1", {
   label = {
     string = "??%",
     padding_left = -1,
-    font = { family = settings.font.numbers }
+    font = {
+      family = settings.font.numbers,
+      style = settings.font.style_map["Regular"],
+    },
   },
 })
 
@@ -42,8 +45,15 @@ local volume_bracket = sbar.add("bracket", "widgets.volume.bracket", {
   volume_percent.name
 }, {
   background = { color = colors.bg2, border_color = colors.bg1, border_width = 2 },
-  blur_radius = 20,
-  popup = { align = "center" }
+  blur_radius = settings.blur_radius,
+  popup = {
+    align = "center",
+    background = {
+      color = colors.bg2,
+      border_color = colors.white,
+      border_width = 2,
+    }
+  }
 })
 
 sbar.add("item", "widgets.volume.padding", {
@@ -133,8 +143,10 @@ local function volume_toggle_details(env)
         end
       end)
     end)
+    volume_bracket:set( { background = { border_color = colors.white } })
   else
     volume_collapse_details()
+    volume_bracket:set({ background = { border_color = colors.bg1 } })
   end
 end
 

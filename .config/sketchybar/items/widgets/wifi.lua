@@ -67,8 +67,16 @@ local wifi_bracket = sbar.add("bracket", "widgets.wifi.bracket", {
   wifi_down.name
 }, {
   background = { color = colors.bg2 , border_color = colors.bg1, border_width = 2 },
-  blur_radius = 20,
-  popup = { align = "center", height = 30 }
+  blur_radius = settings.blur_radius,
+  popup = {
+    align = "center", 
+    height = 30,
+    background = {
+      color = colors.bg2,
+      border_color = colors.white,
+      border_width = 2,
+    }
+  }
 })
 
 local ssid = sbar.add("item", {
@@ -108,6 +116,10 @@ local hostname = sbar.add("item", {
     string = "????????????",
     width = popup_width / 2,
     align = "right",
+    font = {
+      family = settings.font.text,
+      style = settings.font.style_map["Regular"]
+    }
   }
 })
 
@@ -122,6 +134,10 @@ local ip = sbar.add("item", {
     string = "???.???.???.???",
     width = popup_width / 2,
     align = "right",
+    font = {
+      family = settings.font.numbers,
+      style = settings.font.style_map["Regular"]
+    }
   }
 })
 
@@ -136,6 +152,10 @@ local mask = sbar.add("item", {
     string = "???.???.???.???",
     width = popup_width / 2,
     align = "right",
+    font = {
+      family = settings.font.numbers,
+      style = settings.font.style_map["Regular"]
+    }
   }
 })
 
@@ -150,6 +170,10 @@ local router = sbar.add("item", {
     string = "???.???.???.???",
     width = popup_width / 2,
     align = "right",
+    font = {
+      family = settings.font.numbers,
+      style = settings.font.style_map["Regular"]
+    }
   },
 })
 
@@ -209,8 +233,10 @@ local function toggle_details()
     sbar.exec("networksetup -getinfo Wi-Fi | awk -F 'Router: ' '/^Router: / {print $2}'", function(result)
       router:set({ label = result })
     end)
+    wifi_bracket:set({ background = { border_color = colors.white } })
   else
     hide_details()
+    wifi_bracket:set({ background = { border_color = colors.bg1 } })
   end
 end
 
