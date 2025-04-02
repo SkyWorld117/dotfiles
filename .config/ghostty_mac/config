@@ -2,8 +2,8 @@ shell-integration = bash
 shell-integration-features = sudo
 
 background = #000000
-background-opacity = 0.6
-background-blur = 40
+background-opacity = 0.5
+background-blur = 60
 
 theme = "GitHub-Dark-Default"
 cursor-style = bar
@@ -32,3 +32,7 @@ keybind = alt+u=resize_split:left,20
 keybind = alt+i=resize_split:down,20
 keybind = alt+o=resize_split:up,20
 keybind = alt+p=resize_split:right,20
+
+split-divider-color = #FFFFFF
+
+quit-after-last-window-closed = true
