@@ -37,13 +37,10 @@ yabai -m rule --add app="^Orion$" title="^Orion Preview$" manage=off
 yabai -m rule --add app="^Orion$" title="^(General|Appearance|Tabs|Browsing|Sync|Passwords|Privacy|Search|Websites|Advanced|Plus)$" manage=off
 yabai -m rule --add app="^Orion$" title="^(History|Bookmarks|Reading List|Passwords|Extensions|Profiles)$" manage=off
 yabai -m rule --add app="^Orion$" title="^$" manage=off
-
-yabai -m rule --add app="Raycast" manage=off
+yabai -m rule --add app="^Raycast$" manage=off
+yabai -m rule --add app="^Cisco Secure Client$" manage=off
 yabai -m rule --add title="^libigl viewer$" manage=off
 
 yabai -m config layout bsp
 
-# yabai -m signal --add event=space_changed action="yabai -m window --focus \$(yabai -m query --windows --space | jq .[0].id)"
-yabai -m signal --add event=space_changed action="target_id=\$(yabai -m query --windows --space | jq 'map(select(.title != \"Orion Preview\")) | .[0].id') && yabai -m window --focus \$target_id && sleep 0.05 && yabai -m window --focus \$target_id"
-
-yabai -m signal --add event=window_destroyed action="target_id=\$(yabai -m query --windows --space | jq 'map(select(.title != \"Orion Preview\")) | .[0].id') && yabai -m window --focus \$target_id && sleep 0.05 && yabai -m window --focus \$target_id"
+# yabai -m signal --add event=window_destroyed action="target_id=\$(yabai -m query --windows --space | .[0].id') && yabai -m window --focus \$target_id"
