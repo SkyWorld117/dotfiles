@@ -52,3 +52,7 @@ sbar.add("item", { position = "right", width = settings.group_paddings })
 cal:subscribe({ "forced", "routine", "system_woke" }, function(env)
   cal:set({ icon = os.date("%a, %b %d"), label = os.date("%H:%M:%S") })
 end)
+
+cal:subscribe("mouse.clicked", function(env)
+  sbar.exec("open -a 'Calendar'")
+end)
