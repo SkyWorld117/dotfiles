@@ -38,7 +38,7 @@ cmd + shift - 9 : target="$(yabai -m query --windows --window | jq .id)" && yaba
 cmd + shift - 0 : target="$(yabai -m query --windows --window | jq .id)" && yabai -m window --space 10 && yabai -m space --focus 10 && yabai -m window --focus "$target"
 
 cmd + shift - space : yabai -m window --toggle float
-cmd - f : yabai -m window --toggle zoom-fullscreen
+cmd + shift - f : yabai -m window --toggle zoom-fullscreen
 
 cmd - q : ${HOME}/.config/skhd/quit_on_last.sh
 
