@@ -40,3 +40,5 @@ cmd + shift - 0 : target="$(yabai -m query --windows --window | jq .id)" && yaba
 cmd + shift - space : yabai -m window --toggle float
 
 cmd - q : ${HOME}/.config/skhd/quit_on_last.sh
+
+ctrl - t: open -n /Applications/Ghostty.app
