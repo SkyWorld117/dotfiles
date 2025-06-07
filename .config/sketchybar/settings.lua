@@ -1,35 +1,98 @@
+-- Imports
+local fonts = require("fonts")
+local colors = require("colors")
+
+-- Settings
+
+-- Paddings and margins
+local paddings = 3
+local group_paddings = 5
+
+-- Icons and fonts
+local icons = "sf-symbols" -- alternatively available: NerdFont
+local font = fonts.caskaydia
+
+-- Colors
+local bar_color = {
+	bg = colors.transparent,
+}
+local item_color = {
+	bg = 0x80000000,
+	border = 0xff414550,
+	icon = colors.white,
+	label = colors.white,
+	highlight = colors.white,
+}
+local popup_color = {
+	bg = 0x80000000,
+	border = colors.white,
+}
+
+-- Blur radius
+local blur_radius = 60
+
+-- Defaults
+sbar.default({
+	updates = "when_shown",
+	icon = {
+		font = {
+			family = font.text,
+			style = font.style_map["Bold"],
+			size = 14.0,
+		},
+		color = item_color.icon,
+		padding_left = paddings,
+		padding_right = paddings,
+		background = { image = { corner_radius = 9 } },
+	},
+	label = {
+		font = {
+			family = font.text,
+			style = font.style_map["SemiBold"],
+			size = 13.0,
+		},
+		color = item_color.label,
+		padding_left = paddings,
+		padding_right = paddings,
+	},
+	background = {
+		height = 28,
+		corner_radius = 9,
+		color = item_color.bg,
+		border_width = 2,
+		border_color = item_color.border,
+		image = {
+			corner_radius = 9,
+			border_color = colors.grey,
+			border_width = 1,
+		},
+	},
+	popup = {
+		background = {
+			border_width = 2,
+			corner_radius = 9,
+			color = popup_color.bg,
+			border_color = popup_color.border,
+			shadow = { drawing = true },
+		},
+		blur_radius = 50,
+	},
+	padding_left = 5,
+	padding_right = 5,
+	scroll_texts = true,
+})
+
+-- Return settings table
 return {
-  paddings = 3,
-  group_paddings = 5,
+	paddings = paddings,
+	group_paddings = group_paddings,
 
-  icons = "sf-symbols", -- alternatively available: NerdFont
+	icons = icons,
+	font = font,
 
-  -- This is a font configuration for SF Pro and SF Mono (installed manually)
-  font = require("helpers.default_font"),
+	bar_color = bar_color,
+	popup_color = popup_color,
+	item_color = item_color,
 
-  -- Alternatively, this is a font config for JetBrainsMono Nerd Font
-  -- font = {
-  --   text = "JetBrainsMono Nerd Font", -- Used for text
-  --   numbers = "JetBrainsMono Nerd Font", -- Used for numbers
-  --   style_map = {
-  --     ["Regular"] = "Regular",
-  --     ["Semibold"] = "Medium",
-  --     ["Bold"] = "SemiBold",
-  --     ["Heavy"] = "Bold",
-  --     ["Black"] = "ExtraBold",
-  --   },
-  -- },
-  font = {
-    text = "CaskaydiaMono Nerd Font Mono", -- Used for text
-    numbers = "CaskaydiaMono Nerd Font Mono", -- Used for numbers
-    style_map = {
-      ["Regular"] = "Regular",
-      ["Semibold"] = "Medium",
-      ["Bold"] = "SemiBold",
-      ["Heavy"] = "Bold",
-      ["Light"] = "SemiLight"
-    },
-  },
-
-  blur_radius = 60
+	blur_radius = blur_radius,
 }
