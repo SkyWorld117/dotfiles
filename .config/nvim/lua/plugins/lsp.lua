@@ -16,7 +16,7 @@ return {
 					"pylsp",
 					"lua_ls",
 					"yamlls",
-					"julials",
+					-- "julials",
 				},
 			})
 		end,
